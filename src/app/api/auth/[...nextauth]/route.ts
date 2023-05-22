@@ -6,7 +6,10 @@ const handler = NextAuth({
       id: 'infojobs',
       name: 'infojobs',
       type: 'oauth',
-      authorization: 'https://www.infojobs.net/oauth/authorize/index.xhtml',
+      authorization: {
+        url: 'https://www.infojobs.net/oauth/authorize/index.xhtml',
+        params: { scope: 'MY_APPLICATIONS' }
+      },
       token: 'https://www.infojobs.net/login/oauth/access_token',
       userinfo: 'https://api.infojobs.net/candidate',
       clientId: process.env.INFOJOBS_ID,
