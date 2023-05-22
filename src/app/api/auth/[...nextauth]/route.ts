@@ -42,6 +42,7 @@ const handler = NextAuth({
       return session
     },
     async jwt ({ token, user, account, profile, isNewUser }) {
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (account?.accessToken) {
         token.accessToken = account.accessToken
       }
