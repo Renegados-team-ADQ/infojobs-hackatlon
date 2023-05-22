@@ -3,8 +3,8 @@ import NextAuth from 'next-auth/next'
 const handler = NextAuth({
   providers: [
     {
-      id: 'Infojobs',
-      name: 'InfoJobs',
+      id: 'infojobs',
+      name: 'infojobs',
       type: 'oauth',
       authorization: 'https://www.infojobs.net/oauth/authorize/index.xhtml',
       token: 'https://www.infojobs.net/login/oauth/access_token',
