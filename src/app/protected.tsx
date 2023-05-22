@@ -1,16 +1,13 @@
-'use client'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
-export default function Home () {
+export default function Protected () {
   const { data: session } = useSession()
 
   if (session != null) {
     return (
       <div>
         <h1>estas logueado</h1>
-        <button onClick={async () => await signOut()}>
-          Sign Out
-        </button>
+        <button onClick={() => signOut()}>Sign Out</button>
       </div>
     )
   }
@@ -18,9 +15,7 @@ export default function Home () {
   return (
     <div>
       <h1>No estas logueado</h1>
-      <button onClick={async () => await signIn()}>
-        Sign in
-      </button>
+      <button onClick={() => signIn()}>Sign In</button>
     </div>
   )
 }
