@@ -7,7 +7,7 @@ export const authOptions: NextAuthOptions = {
       name: 'infojobs',
       type: 'oauth',
       authorization: {
-        url: 'https://infojobs-hackatlon-gww.vercel.app/',
+        url: 'https://www.infojobs.net/oauth/authorize/index.xhtml',
         params: { scope: 'MY_APPLICATIONS' }
       },
       token: 'https://www.infojobs.net/login/oauth/access_token',
@@ -32,24 +32,24 @@ export const authOptions: NextAuthOptions = {
   },
   jwt: {
     maxAge: 60 * 60 * 24 * 30
-  },
-  callbacks: {
-    async signIn ({ user, account, profile, email, credentials }) {
-      console.log('user', user, account, profile)
-      return true
-    },
-    async redirect ({ url, baseUrl }) {
-      return baseUrl
-    },
-    async session ({ session, token, user }) {
-      return session
-    },
-    async jwt ({ token, user, account, profile, isNewUser }) {
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      if (account?.accessToken) {
-        token.accessToken = account.accessToken
-      }
-      return token
-    }
   }
+//   callbacks: {
+//     async signIn ({ user, account, profile, email, credentials }) {
+//       console.log('user', user, account, profile)
+//       return true
+//     },
+//     async redirect ({ url, baseUrl }) {
+//       return baseUrl
+//     },
+//     async session ({ session, token, user }) {
+//       return session
+//     },
+//     async jwt ({ token, user, account, profile, isNewUser }) {
+//       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+//       if (account?.accessToken) {
+//         token.accessToken = account.accessToken
+//       }
+//       return token
+//     }
+//   }
 }
