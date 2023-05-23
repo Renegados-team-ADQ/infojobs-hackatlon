@@ -19,6 +19,7 @@ export default function Home () {
 
   return (
     <div>
+      <p>Mas test de los collons</p>
       <h1>PERO ESTO QUE ES???? v2.0</h1>
       <h1>No estas logueado</h1>
       <button onClick={async () => await signIn()}>
