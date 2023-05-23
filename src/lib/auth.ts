@@ -7,7 +7,7 @@ export const authOptions: NextAuthOptions = {
       name: 'infojobs',
       type: 'oauth',
       authorization: {
-        url: 'http://www.infojobs.net/core/oauth2vc/index.xhtml',
+        url: 'https://infojobs-hackatlon-gww.vercel.app/',
         params: { scope: 'MY_APPLICATIONS' }
       },
       token: 'https://www.infojobs.net/login/oauth/access_token',
