@@ -8,6 +8,7 @@ export default function Home () {
   if (session != null) {
     return (
       <div>
+        <h1>PERO ESTO QUE ES????</h1>
         <h1>estas logueado</h1>
         <button onClick={async () => await signOut()}>
           Sign Out
