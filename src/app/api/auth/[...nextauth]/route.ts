@@ -7,7 +7,7 @@ const handler = NextAuth({
       name: 'infojobs',
       type: 'oauth',
       authorization: {
-        url: 'http://www.infojobs.net/core/oauth2vc/index.xhtml',
+        url: 'https://www.infojobs.net/oauth/authorize/index.xhtml',
         params: { scope: 'MY_APPLICATIONS' }
       },
       token: 'https://www.infojobs.net/login/oauth/access_token',
