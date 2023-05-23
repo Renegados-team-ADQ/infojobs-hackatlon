@@ -22,6 +22,7 @@ export default function Home () {
       <p>Mas test de los collons</p>
       <h1>PERO ESTO QUE ES???? v2.0</h1>
       <h1>No estas logueado</h1>
+      <p>hola</p>
       <button onClick={async () => await signIn('infojobs', { callbackUrl: 'https://infojobs-hackatlon-gww.vercel.app/' })}>
         Sign in
       </button>
