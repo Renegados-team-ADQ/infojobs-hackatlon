@@ -39,7 +39,7 @@ const handler = NextAuth({
       return true
     },
     async redirect ({ url, baseUrl }) {
-      return baseUrl
+      return url
     },
     async session ({ session, token, user }) {
       return session
