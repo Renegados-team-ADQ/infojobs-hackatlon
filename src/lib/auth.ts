@@ -7,7 +7,7 @@ export const authOptions: NextAuthOptions = {
       name: 'infojobs',
       type: 'oauth',
       authorization: {
-        url: 'https://www.infojobs.net/api/oauth/user-authorize/index.xhtml',
+        url: 'https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?response_type=code',
         params: { scope: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL' }
       },
       token: {
@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
   },
   jwt: {
     maxAge: 60 * 60 * 24 * 30
-  },
+  }, /*
   callbacks: {
     async signIn ({ user, account, profile, email, credentials }) {
       console.log('user', user, account, profile)
@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token
     }
-  },
+  }, */
   pages: {
     signIn: '/',
     signOut: '/',
