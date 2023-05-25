@@ -8,16 +8,18 @@ export const authOptions: NextAuthOptions = {
       type: 'oauth',
       authorization: {
         url: 'https://www.infojobs.net/api/oauth/user-authorize/index.xhtml',
-        params: { scope: 'MY_APPLICATIONS' }
+        params: { scope: 'MY_APPLICATIONS CANDIDATE_PROFILE_WITH_EMAIL ' }
       },
-      token: 'https://www.infojobs.net/oauth/authorize',
+      accessTokenUrl: 'https://www.infojobs.net/oauth/authorize',
       clientId: process.env.INFOJOBS_ID,
       clientSecret: process.env.INFOJOBS_SECRET,
-      profile (profile) {
+      profileUrl: 'https://api.infojobs.net/api/6/candidate',
+      profile (profile, tokens) {
         console.log('profile ', profile)
         return {
           id: profile.id,
-          name: profile?.name
+          name: profile?.name,
+          email: profile.email
         }
       }
     }
