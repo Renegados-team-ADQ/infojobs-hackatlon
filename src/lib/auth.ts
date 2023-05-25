@@ -10,7 +10,14 @@ export const authOptions: NextAuthOptions = {
         url: 'https://www.infojobs.net/api/oauth/user-authorize/index.xhtml',
         params: { scope: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL' }
       },
-      token: 'https://www.infojobs.net/oauth/authorize',
+      token: {
+        url: 'https://www.infojobs.net/oauth/authorize/token'
+        // params: {
+        //   grant_type: 'authorization_code',
+        //   clientId: process.env.INFOJOBS_ID,
+        //   clientSecret: process.env.INFOJOBS_SECRET
+        // }
+      },
       clientId: process.env.INFOJOBS_ID,
       clientSecret: process.env.INFOJOBS_SECRET,
       profileUrl: 'https://api.infojobs.net/api/6/candidate',
