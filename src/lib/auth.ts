@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
   jwt: {
     maxAge: 60 * 60 * 24 * 30
   },
-  callbacks: {
+  /* callbacks: {
     async signIn ({ user, account, profile, email, credentials }) {
       console.log('user', user, account, profile)
       return true
@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token
     }
-  },
+  }, */
   pages: {
     signIn: '/auth/signin',
     signOut: '/auth/signout',
