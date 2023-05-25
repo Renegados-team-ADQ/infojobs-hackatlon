@@ -18,6 +18,7 @@ export const authOptions: NextAuthOptions = {
         //   clientSecret: process.env.INFOJOBS_SECRET
         // }
       },
+      idToken: true,
       clientId: process.env.INFOJOBS_ID,
       clientSecret: process.env.INFOJOBS_SECRET,
       profileUrl: 'https://api.infojobs.net/api/6/candidate',
