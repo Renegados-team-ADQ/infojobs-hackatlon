@@ -23,7 +23,7 @@ export default function Home () {
       <h1>PERO ESTO QUE ES???? v2.0</h1>
       <h1>No estas logueado</h1>
       <p>hola</p>
-      <button onClick={async () => await signIn('infojobs')}>
+      <button onClick={async () => await signIn('infojobs', { redirect: false })}>
         Sign in
       </button>
     </div>
