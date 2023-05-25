@@ -43,31 +43,31 @@ export const authOptions: NextAuthOptions = {
   },
   jwt: {
     maxAge: 60 * 60 * 24 * 30
-  }, /*
+  },
   callbacks: {
     async signIn ({ user, account, profile, email, credentials }) {
       console.log('user', user, account, profile)
       return true
-    },
+    }, /*
     async redirect ({ url, baseUrl }) {
       return baseUrl
-    },
+    }, */
     async session ({ session, token, user }) {
       return session
-    },
+    }/* ,
     async jwt ({ token, user, account, profile, isNewUser }) {
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (account?.accessToken) {
         token.accessToken = account.accessToken
       }
       return token
-    }
-  }, */
+    } */
+  }/* ,
   pages: {
     signIn: '/',
     signOut: '/',
     error: '/auth/error', // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  }
+  } */
 }
