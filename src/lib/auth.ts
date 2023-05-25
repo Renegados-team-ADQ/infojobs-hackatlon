@@ -10,7 +10,8 @@ export const authOptions: NextAuthOptions = {
         url: 'https://www.infojobs.net/api/oauth/user-authorize/index.xhtml',
         params: {
           scope: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL',
-          response_type: 'code'
+          response_type: 'code',
+          state: process.env.NEXTAUTH_SECRET
         }
       },
       token: {
