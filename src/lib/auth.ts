@@ -11,7 +11,7 @@ export const authOptions: NextAuthOptions = {
         params: { scope: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL' }
       },
       token: {
-        url: 'https://www.infojobs.net/oauth/authorize/token'
+        url: 'https://www.infojobs.net/oauth/authorize'
         // params: {
         //   grant_type: 'authorization_code',
         //   clientId: process.env.INFOJOBS_ID,
@@ -31,7 +31,6 @@ export const authOptions: NextAuthOptions = {
       }
     }
   ],
-
   secret: process.env.NEXTAUTH_SECRET,
   debug: true,
   session: {
@@ -59,5 +58,12 @@ export const authOptions: NextAuthOptions = {
       }
       return token
     }
+  },
+  pages: {
+    signIn: '/auth/signin',
+    signOut: '/auth/signout',
+    error: '/auth/error', // Error code passed in query string as ?error=
+    verifyRequest: '/auth/verify-request', // (used for check email message)
+    newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   }
 }
