@@ -11,7 +11,8 @@ export const authOptions: NextAuthOptions = {
         params: {
           scope: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL',
           response_type: 'code',
-          state: process.env.NEXTAUTH_SECRET
+          state: process.env.NEXTAUTH_SECRET,
+          redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/auth/callback/infojobs'
         }
       },
       token: {
