@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
   jwt: {
     maxAge: 60 * 60 * 24 * 30
   },
-  /* callbacks: {
+  callbacks: {
     async signIn ({ user, account, profile, email, credentials }) {
       console.log('user', user, account, profile)
       return true
@@ -58,10 +58,10 @@ export const authOptions: NextAuthOptions = {
       }
       return token
     }
-  }, */
+  },
   pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout',
+    signIn: '/',
+    signOut: '/',
     error: '/auth/error', // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
