@@ -6,7 +6,7 @@ export const authOptions: NextAuthOptions = {
     InfojobsProvider({
       clientId: process.env.INFOJOBS_ID ?? '',
       clientSecret: process.env.INFOJOBS_SECRET ?? '',
-      redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/callback',
+      redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/callback/infojobs',
       infojobs_scopes:
         'CANDIDATE_PROFILE_WITH_EMAIL,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE,MY_APPLICATION'
     })
