@@ -4,7 +4,7 @@ import InfojobsProvider from 'infojobs-next-auth-provider'
 export const authOptions: NextAuthOptions = {
   providers: [
     InfojobsProvider({
-      clientId: process.env.INFOJOBS_CLIENT_ID ?? '',
+      clientId: process.env.INFOJOBS_ID ?? '',
       clientSecret: process.env.INFOJOBS_SECRET ?? '',
       redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/callback',
       infojobs_scopes:
