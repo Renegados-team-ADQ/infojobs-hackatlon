@@ -1,15 +1,40 @@
 import { NextAuthOptions } from 'next-auth'
-import InfojobsProvider from 'infojobs-next-auth-provider'
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    InfojobsProvider({
-      clientId: process.env.INFOJOBS_ID ?? '',
-      clientSecret: process.env.INFOJOBS_SECRET ?? '',
-      redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/callback/infojobs',
-      infojobs_scopes:
-        'CANDIDATE_PROFILE_WITH_EMAIL,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE,MY_APPLICATIONS'
-    })
+    {
+      id: 'infojobs',
+      name: 'infojobs',
+      type: 'oauth',
+      authorization: {
+        url: 'https://www.infojobs.net/api/oauth/user-authorize/index.xhtml',
+        params: {
+          scope: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL',
+          response_type: 'code',
+          state: process.env.NEXTAUTH_SECRET
+        }
+      },
+      token: {
+        url: 'https://www.infojobs.net/oauth/authorize'
+        // params: {
+        //   grant_type: 'authorization_code',
+        //   clientId: process.env.INFOJOBS_ID,
+        //   clientSecret: process.env.INFOJOBS_SECRET
+        // }
+      },
+      idToken: true,
+      clientId: process.env.INFOJOBS_ID,
+      clientSecret: process.env.INFOJOBS_SECRET,
+      profileUrl: 'https://api.infojobs.net/api/6/candidate',
+      profile (profile, tokens) {
+        console.log('profile ', profile)
+        return {
+          id: profile.id,
+          name: profile?.name,
+          email: profile.email
+        }
+      }
+    }
   ],
   callbacks: {
     async jwt ({ token, account }) {
