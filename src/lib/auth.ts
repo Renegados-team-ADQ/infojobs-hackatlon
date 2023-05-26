@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.INFOJOBS_SECRET ?? '',
       redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/callback/infojobs',
       infojobs_scopes:
-        'CANDIDATE_PROFILE_WITH_EMAIL,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE,MY_APPLICATION'
+        'CANDIDATE_PROFILE_WITH_EMAIL,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE,MY_APPLICATIONS'
     })
   ],
   callbacks: {
