@@ -1,70 +1,29 @@
 import { NextAuthOptions } from 'next-auth'
+import InfojobsProvider from 'infojobs-next-auth-provider'
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    {
-      id: 'infojobs',
-      name: 'infojobs',
-      type: 'oauth',
-      authorization: {
-        url: 'https://www.infojobs.net/api/oauth/user-authorize/index.xhtml',
-        params: {
-          scope: 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL',
-          response_type: 'code',
-          state: process.env.NEXTAUTH_SECRET,
-          redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/auth/callback/infojobs'
-        }
-      },
-      token: {
-        url: 'https://www.infojobs.net/oauth/authorize'
-        // params: {
-        //   grant_type: 'authorization_code',
-        //   clientId: process.env.INFOJOBS_ID,
-        //   clientSecret: process.env.INFOJOBS_SECRET
-        // }
-      },
-      idToken: true,
-      clientId: process.env.INFOJOBS_ID,
-      clientSecret: process.env.INFOJOBS_SECRET,
-      profileUrl: 'https://api.infojobs.net/api/6/candidate',
-      profile (profile, tokens) {
-        console.log('profile ', profile)
-        return {
-          id: profile.id,
-          name: profile?.name,
-          email: profile.email
-        }
-      }
-    }
+    InfojobsProvider({
+      clientId: process.env.INFOJOBS_CLIENT_ID ?? '',
+      clientSecret: process.env.INFOJOBS_SECRET ?? '',
+      redirect_uri: 'https://infojobs-hackatlon-gww.vercel.app/api/callback',
+      infojobs_scopes:
+        'CANDIDATE_PROFILE_WITH_EMAIL,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE,MY_APPLICATION'
+    })
   ],
-  secret: process.env.NEXTAUTH_SECRET,
-  debug: true,
-  session: {
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60 // 24 hours
-  },
-  jwt: {
-    maxAge: 60 * 60 * 24 * 30
-  },
   callbacks: {
-    async signIn ({ user, account, profile, email, credentials }) {
-      console.log('user', user, account, profile)
-      return true
-    }, /*
-    async redirect ({ url, baseUrl }) {
-      return baseUrl
-    }, */
-    async session ({ session, token, user }) {
-      return session
-    }/* ,
-    async jwt ({ token, user, account, profile, isNewUser }) {
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      if (account?.accessToken) {
-        token.accessToken = account.accessToken
+    async jwt ({ token, account }) {
+      if (account != null) {
+        token.accessToken = account.access_token
+        token.refreshToken = account.refresh_token
       }
       return token
-    } */
-  }/* ,
+    }/*,
+    async session ({ session, token }) {
+      session.accessToken = token.accessToken
+      session.refreshToken = token.refreshToken
+      return session
+    } ,
   pages: {
     signIn: '/',
     signOut: '/',
@@ -72,4 +31,5 @@ export const authOptions: NextAuthOptions = {
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   } */
+  }
 }
