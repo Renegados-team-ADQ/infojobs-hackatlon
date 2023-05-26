@@ -18,11 +18,11 @@ const getApplications = async (): Promise<string> => {
   return applications
 }
 
-export default async function Home () {
+export default function Home () {
   const { data: session } = useSession()
 
   if (session != null) {
-    console.log(await getApplications())
+    console.log(getApplications())
 
     return (
       <div>
