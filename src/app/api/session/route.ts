@@ -8,9 +8,11 @@ export async function GET (request: Request) {
   const bearerToken = `Bearer ${session?.accessToken ?? ''}`
   const data = await fetch('https://api.infojobs.net/api/5/application', {
     headers: {
+      'Content-type': 'application/json',
       Authorization: `${basicToken},${bearerToken}`
     }
   })
+  console.log(data)
   return NextResponse.json({
     authenticated: !(session == null),
     session,
