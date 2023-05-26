@@ -13,6 +13,8 @@ export const authOptions: NextAuthOptions = {
           response_type: 'code'
         }
       },
+      clientId: process.env.INFOJOBS_ID ?? '',
+      clientSecret: process.env.INFOJOBS_SECRET ?? '',
       token: {
         url: 'https://www.infojobs.net/oauth/authorize',
         async request ({ params }) {
@@ -73,12 +75,12 @@ export const authOptions: NextAuthOptions = {
         token.refreshToken = account.refresh_token
       }
       return token
-    }/*,
+    },
     async session ({ session, token }) {
-      session.accessToken = token.accessToken
-      session.refreshToken = token.refreshToken
+      session.accessToken = token.accessToken as string
+      session.refreshToken = token.refreshToken as string
       return session
-    } ,
+    } /*,
   pages: {
     signIn: '/',
     signOut: '/',
