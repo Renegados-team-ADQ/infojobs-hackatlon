@@ -1,11 +1,30 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
+
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+
+const getApplications = async (): Promise<string> => {
+  const session = await getServerSession(authOptions)
+  const basicToken = `Basic ${Buffer.from(`${process.env.INFOJOBS_ID ?? ''}:${process.env.INFOJOBS_SECRET ?? ''}`).toString('base64')}`
+  const bearerToken = `Bearer ${session?.accessToken ?? ''}`
+  const data = await fetch('https://api.infojobs.net/api/5/application', {
+    headers: {
+      Authoritzation: `${basicToken},${bearerToken}`
+    }
+  })
+  const applications = await data.json()
+  return applications
+}
 
 export default function Home () {
   const { data: session } = useSession()
 
   if (session != null) {
+    const applications = getApplications()
+    applications.then(res => console.log(res)).catch(err => console.log(err))
+
     return (
       <div>
         <h1>PERO ESTO QUE ES????</h1>
