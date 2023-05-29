@@ -12,7 +12,8 @@ export async function GET (request: Request) {
       Authorization: `${basicToken},${bearerToken}`
     }
   })
-  console.log(data)
+  const json = await data.json()
+  console.log(json)
   return NextResponse.json({
     authenticated: !(session == null),
     session,
