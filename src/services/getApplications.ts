@@ -38,13 +38,9 @@ export interface JobOffer {
   logoUrl: string
 }
 export async function getApplications () {
-  const session = await getServerSession(authOptions)
-  const basicToken = `Basic ${Buffer.from(`${process.env.INFOJOBS_ID ?? ''}:${process.env.INFOJOBS_SECRET ?? ''}`).toString('base64')}`
-  const bearerToken = `Bearer ${session?.accessToken ?? ''}`
-  const res = await fetch('https://api.infojobs.net/api/5/application', {
+  const res = await fetch('/api/get-applications', {
     headers: {
-      'Content-type': 'application/json',
-      Authorization: `${basicToken},${bearerToken}`
+      'Content-type': 'application/json'
     }
   })
   const { item }: { item: APIResultApplications } = await res.json()
