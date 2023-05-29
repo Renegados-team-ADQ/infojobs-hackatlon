@@ -7,13 +7,12 @@ export function SignInOut () {
   const { data: session } = useSession()
 
   if (session != null) {
-    console.log(getApplications())
-
     return (
       <div>
         <h1>PERO ESTO QUE ES????</h1>
         <h1>estas logueado</h1>
         <p>{session.user?.name}</p>
+        <button onClick={async () => await getApplications()}>Get Applications mirar consola</button>
         <button onClick={async () => await signOut()}>
           Sign Out
         </button>
