@@ -1,3 +1,7 @@
+interface DataResult {
+  data: APIResultApplications
+}
+
 interface APIResultApplications {
   totalFound: number
   htmlApplicationsEnabled: boolean
@@ -40,8 +44,8 @@ export async function getApplications () {
       'Content-type': 'application/json'
     }
   })
-  const { item }: { item: APIResultApplications } = await res.json()
-  const listOfApplications = item.applications.map(item => {
+  const { item }: { item: DataResult } = await res.json()
+  const listOfApplications = item.data.applications.map(item => {
     const { jobOffer, rejected, date } = item
     const { title, code, city } = jobOffer
     return {
