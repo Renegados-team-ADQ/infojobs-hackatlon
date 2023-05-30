@@ -21,6 +21,6 @@ export async function GET (req: NextRequest) {
     }
   })
 
-  const data: JSON = await applicationsResults.json()
+  const data = await applicationsResults.json()
   return NextResponse.json(data)
 }
