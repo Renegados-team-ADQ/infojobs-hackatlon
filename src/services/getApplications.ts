@@ -1,4 +1,4 @@
-/* interface APIResultApplications {
+interface APIResultApplications {
   totalFound: number
   htmlApplicationsEnabled: boolean
   applications: Application[]
@@ -33,7 +33,7 @@ interface JobOffer {
   company: string
   city: string
   logoUrl: string
-} */
+}
 export async function getApplications () {
   const res = await fetch('/api/get-applications', {
     headers: {
@@ -41,11 +41,9 @@ export async function getApplications () {
     }
   })
   console.log(res)
-  /* const { item }: { item: APIResultApplications } = await res.json()
-  const papa = await res.json() */
-  console.log(typeof res)
-  /* console.log(item)
-   const listOfApplications = item.applications.map(item => {
+  const { item }: { item: APIResultApplications } = await res.json()
+  console.log(item)
+  const listOfApplications = item.applications.map(item => {
     const { jobOffer, rejected, date } = item
     const { title, code, city } = jobOffer
     return {
@@ -57,6 +55,6 @@ export async function getApplications () {
 
     }
   })
-  console.log(listOfApplications) */
-  return null
+  console.log(listOfApplications)
+  return listOfApplications
 }
