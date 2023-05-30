@@ -1,2 +1,2 @@
-export { default } from 'next-auth/middleware'
-export const config = { matcher: ['/api/get-applications'] }
+// export { default } from 'next-auth/middleware'
+// export const config = { matcher: ['/api/get-applications'] }
