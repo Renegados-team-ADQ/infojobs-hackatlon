@@ -22,7 +22,5 @@ export async function GET (req: NextRequest) {
   })
   const data = await resListCurriculums.json()
 
-  return NextResponse.json({
-    data
-  })
+  return NextResponse.json(data)
 }
