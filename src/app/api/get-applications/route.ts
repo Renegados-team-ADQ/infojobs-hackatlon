@@ -22,7 +22,7 @@ export async function GET (req: NextRequest) {
   })
 
   try {
-    const data = await applicationsResults.json()
+    const data: JSON = await applicationsResults.json()
     return NextResponse.json(data)
   } catch {
     return new Response('No se ha podido transformar el JSON', { status: 500 })
