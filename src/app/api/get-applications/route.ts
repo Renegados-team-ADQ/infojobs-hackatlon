@@ -2,7 +2,7 @@ import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
 
 const BASE_URL = 'https://api.infojobs.net'
-const APPLICATION_ENDPOINT = `${BASE_URL}api/5/application`
+const APPLICATION_ENDPOINT = `${BASE_URL}/api/5/application`
 const CLIENT_ID = process.env.INFOJOBS_ID ?? ''
 const CLIENT_SECRET = process.env.INFOJOBS_SECRET ?? ''
 const BASIC_TOKEN = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
@@ -21,10 +21,6 @@ export async function GET (req: NextRequest) {
     }
   })
 
-  try {
-    const data: JSON = await applicationsResults.json()
-    return NextResponse.json(data)
-  } catch {
-    return new Response('No se ha podido transformar el JSON', { status: 500 })
-  }
+  const data: JSON = await applicationsResults.json()
+  return NextResponse.json(data)
 }

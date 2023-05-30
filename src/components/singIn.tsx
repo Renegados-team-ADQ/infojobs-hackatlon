@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
-import { getApplications } from '@/services/getApplications'
+import fetcherWithAuth from '@/services/fecherWithAuth'
+// import { getApplications } from '@/services/getApplications'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
 export function SignInOut () {
@@ -13,7 +14,7 @@ export function SignInOut () {
         <h1>estas logueado</h1>
         <p>testing tests</p>
         <p>{session.user?.name}</p>
-        <button onClick={async () => await getApplications()}>Get Applications mirar consola</button>
+        <button onClick={async () => await fetcherWithAuth('https://api.infojobs.net/api/5/application')}>Get Applications mirar consola</button>
         <button onClick={async () => await signOut()}>
           Sign Out
         </button>
