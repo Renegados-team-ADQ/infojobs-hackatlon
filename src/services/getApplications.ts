@@ -40,7 +40,9 @@ export async function getApplications () {
       'Content-type': 'application/json'
     }
   })
+  console.log(res)
   const { item }: { item: APIResultApplications } = await res.json()
+  console.log(item)
   const listOfApplications = item.applications.map(item => {
     const { jobOffer, rejected, date } = item
     const { title, code, city } = jobOffer
