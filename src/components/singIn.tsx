@@ -13,7 +13,7 @@ export function SignInOut () {
         <h1>estas logueado</h1>
         <p>testing tests</p>
         <p>{session.user?.name}</p>
-        <button onClick={async () => await getApplications(session)}>Get Applications mirar consola</button>
+        <button onClick={async () => await getApplications()}>Get Applications mirar consola</button>
         <button onClick={async () => await signOut()}>
           Sign Out
         </button>

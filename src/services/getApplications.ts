@@ -1,12 +1,10 @@
-import { Session } from 'next-auth'
-
-export interface APIResultApplications {
+interface APIResultApplications {
   totalFound: number
   htmlApplicationsEnabled: boolean
   applications: Application[]
 }
 
-export interface Application {
+interface Application {
   rejected: boolean
   offerRemoved: boolean
   processClosed: boolean
@@ -20,7 +18,7 @@ export interface Application {
   notPreselectedCandidateEvent?: Event
 }
 
-export interface Event {
+interface Event {
   tipoId: number
   date: string
   description: string
@@ -29,29 +27,32 @@ export interface Event {
   rejectedReasons: string[]
 }
 
-export interface JobOffer {
+interface JobOffer {
   code: string
   title: string
   company: string
   city: string
   logoUrl: string
 }
-export async function getApplications (session: Session) {
-  const BASE_URL = 'https://api.infojobs.net'
-  const APPLICATION_ENDPOINT = `${BASE_URL}/api/5/application`
-  const CLIENT_ID = process.env.INFOJOBS_ID ?? ''
-  const CLIENT_SECRET = process.env.INFOJOBS_SECRET ?? ''
-  const BASIC_TOKEN = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
-    'base64'
-  )
-  const { accessToken } = session
-  const resListCurriculums = await fetch(APPLICATION_ENDPOINT, {
+export async function getApplications () {
+  const res = await fetch('/api/get-applications', {
     headers: {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken}`
+      'Content-type': 'application/json'
     }
   })
-  const data = await resListCurriculums.json()
-  console.log('papa')
-  return data
+  const { item }: { item: APIResultApplications } = await res.json()
+  const listOfApplications = item.applications.map(item => {
+    const { jobOffer, rejected, date } = item
+    const { title, code, city } = jobOffer
+    return {
+      title,
+      code,
+      city,
+      rejected,
+      date
+
+    }
+  })
+  console.log(listOfApplications)
+  return listOfApplications
 }
