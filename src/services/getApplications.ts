@@ -1,6 +1,3 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-
 export interface APIResultApplications {
   totalFound: number
   htmlApplicationsEnabled: boolean
@@ -38,7 +35,7 @@ export interface JobOffer {
   logoUrl: string
 }
 export async function getApplications () {
-  const session = await getServerSession(authOptions)
+  /* const session = await getServerSession(authOptions)
   const basicToken = `Basic ${Buffer.from(`${process.env.INFOJOBS_ID ?? ''}:${process.env.INFOJOBS_SECRET ?? ''}`).toString('base64')}`
   const bearerToken = `Bearer ${session?.accessToken ?? ''}`
   const res = await fetch('https://api.infojobs.net/api/5/application', {
@@ -61,5 +58,11 @@ export async function getApplications () {
     }
   })
   console.log(listOfApplications)
+  return listOfApplications */
+
+  const res = await fetch('infojobs-hackatlon-gww.vercel.app/api/get-applications')
+
+  const listOfApplications = await res.json()
+  console.log('papapapa')
   return listOfApplications
 }
