@@ -1,13 +1,10 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-
-export interface APIResultApplications {
+interface APIResultApplications {
   totalFound: number
   htmlApplicationsEnabled: boolean
   applications: Application[]
 }
 
-export interface Application {
+interface Application {
   rejected: boolean
   offerRemoved: boolean
   processClosed: boolean
@@ -21,7 +18,7 @@ export interface Application {
   notPreselectedCandidateEvent?: Event
 }
 
-export interface Event {
+interface Event {
   tipoId: number
   date: string
   description: string
@@ -30,7 +27,7 @@ export interface Event {
   rejectedReasons: string[]
 }
 
-export interface JobOffer {
+interface JobOffer {
   code: string
   title: string
   company: string
