@@ -20,7 +20,11 @@ export async function GET (req: NextRequest) {
       Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken}`
     }
   })
-  const data = await applicationsResults.json()
 
-  return NextResponse.json(data)
+  try {
+    const data = await applicationsResults.json()
+    return NextResponse.json(data)
+  } catch {
+    return new Response('No se ha podido transformar el JSON', { status: 500 })
+  }
 }
