@@ -1,3 +1,5 @@
+import { Session } from 'next-auth'
+
 export interface APIResultApplications {
   totalFound: number
   htmlApplicationsEnabled: boolean
@@ -34,35 +36,22 @@ export interface JobOffer {
   city: string
   logoUrl: string
 }
-export async function getApplications () {
-  /* const session = await getServerSession(authOptions)
-  const basicToken = `Basic ${Buffer.from(`${process.env.INFOJOBS_ID ?? ''}:${process.env.INFOJOBS_SECRET ?? ''}`).toString('base64')}`
-  const bearerToken = `Bearer ${session?.accessToken ?? ''}`
-  const res = await fetch('https://api.infojobs.net/api/5/application', {
+export async function getApplications (session: Session) {
+  const BASE_URL = 'https://api.infojobs.net'
+  const APPLICATION_ENDPOINT = `${BASE_URL}/api/5/application`
+  const CLIENT_ID = process.env.INFOJOBS_ID ?? ''
+  const CLIENT_SECRET = process.env.INFOJOBS_SECRET ?? ''
+  const BASIC_TOKEN = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
+    'base64'
+  )
+  const { accessToken } = session
+  const resListCurriculums = await fetch(APPLICATION_ENDPOINT, {
     headers: {
-      'Content-type': 'application/json',
-      Authorization: `${basicToken},${bearerToken}`
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      Authorization: `Basic ${BASIC_TOKEN},Bearer ${accessToken}`
     }
   })
-  const { item }: { item: APIResultApplications } = await res.json()
-  const listOfApplications = item.applications.map(item => {
-    const { jobOffer, rejected, date } = item
-    const { title, code, city } = jobOffer
-    return {
-      title,
-      code,
-      city,
-      rejected,
-      date
-
-    }
-  })
-  console.log(listOfApplications)
-  return listOfApplications */
-
-  const res = await fetch('infojobs-hackatlon-gww.vercel.app/api/get-applications')
-
-  const listOfApplications = await res.json()
-  console.log('papapapa')
-  return listOfApplications
+  const data = await resListCurriculums.json()
+  console.log('papa')
+  return data
 }
