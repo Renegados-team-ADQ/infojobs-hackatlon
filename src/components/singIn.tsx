@@ -11,6 +11,7 @@ export function SignInOut () {
       <div>
         <h1>PERO ESTO QUE ES????</h1>
         <h1>estas logueado</h1>
+        <p>testing tests</p>
         <p>{session.user?.name}</p>
         <button onClick={async () => await getApplications()}>Get Applications mirar consola</button>
         <button onClick={async () => await signOut()}>
