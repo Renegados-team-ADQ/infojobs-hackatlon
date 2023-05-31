@@ -26,7 +26,7 @@ export function SignInOut () {
       <h1>PERO ESTO QUE ES???? v2.0</h1>
       <h1>No estas logueado</h1>
       <p>hola</p>
-      <button onClick={async () => await signIn('infojobs', { callbackUrl: '/api/lost-of-app' })}>
+      <button onClick={async () => await signIn('infojobs', { callbackUrl: '/list-of-app' })}>
         Sign in
       </button>
     </div>
