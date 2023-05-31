@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
 import { useSession, signIn, signOut } from 'next-auth/react'
-import ListOfApplications from './ListOfApplications'
 
 export function SignInOut () {
   const { data: session } = useSession()
@@ -14,7 +13,6 @@ export function SignInOut () {
         <p>testing tests</p>
         <p>{session.user?.name}</p>
         <p>List of Applications</p>
-        <ListOfApplications />
         <button onClick={async () => await signOut()}>
           Sign Out
         </button>
@@ -28,7 +26,7 @@ export function SignInOut () {
       <h1>PERO ESTO QUE ES???? v2.0</h1>
       <h1>No estas logueado</h1>
       <p>hola</p>
-      <button onClick={async () => await signIn('infojobs', { redirect: false })}>
+      <button onClick={async () => await signIn('infojobs', { callbackUrl: '/api/lost-of-app' })}>
         Sign in
       </button>
     </div>
