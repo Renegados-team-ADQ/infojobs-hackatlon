@@ -39,7 +39,7 @@ export default function ListOfApplications () {
         : (
           <div>
 
-            <p>{data[0].title}</p>
+            <p>{data.toString()}</p>
 
           </div>
           )}
