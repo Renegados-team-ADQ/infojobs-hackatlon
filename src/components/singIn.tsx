@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
-import { getApplications } from '@/services/getApplications'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import ListOfApplications from './ListOfApplications'
 
 export function SignInOut () {
   const { data: session } = useSession()
@@ -13,7 +13,8 @@ export function SignInOut () {
         <h1>estas logueado</h1>
         <p>testing tests</p>
         <p>{session.user?.name}</p>
-        <button onClick={async () => await getApplications()}>Get Applications mirar consola</button>
+        <p>List of Applications</p>
+        <ListOfApplications />
         <button onClick={async () => await signOut()}>
           Sign Out
         </button>

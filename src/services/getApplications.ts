@@ -1,10 +1,12 @@
-interface APIResultApplications {
+import { Session } from 'next-auth'
+
+export interface APIResultApplications {
   totalFound: number
   htmlApplicationsEnabled: boolean
   applications: Application[]
 }
 
-interface Application {
+export interface Application {
   rejected: boolean
   offerRemoved: boolean
   processClosed: boolean
@@ -18,7 +20,7 @@ interface Application {
   notPreselectedCandidateEvent?: Event
 }
 
-interface Event {
+export interface Event {
   tipoId: number
   date: string
   description: string
@@ -27,22 +29,23 @@ interface Event {
   rejectedReasons: string[]
 }
 
-interface JobOffer {
+export interface JobOffer {
   code: string
   title: string
   company: string
   city: string
   logoUrl: string
 }
-export async function getApplications () {
-  const res = await fetch('/api/get-applications', {
+export async function getApplications (session: Session) {
+  const basicToken = `Basic ${Buffer.from(`${process.env.INFOJOBS_ID ?? ''}:${process.env.INFOJOBS_SECRET ?? ''}`).toString('base64')}`
+  const bearerToken = `Bearer ${session?.accessToken ?? ''}`
+  const res = await fetch('https://api.infojobs.net/api/5/application', {
     headers: {
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
+      Authorization: `${basicToken},${bearerToken}`
     }
   })
-  console.log(res)
   const { item }: { item: APIResultApplications } = await res.json()
-  console.log(item)
   const listOfApplications = item.applications.map(item => {
     const { jobOffer, rejected, date } = item
     const { title, code, city } = jobOffer
