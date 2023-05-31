@@ -41,7 +41,6 @@ export async function getApplications (session: Session) {
   const bearerToken = `Bearer ${session?.accessToken ?? ''}`
   const res = await fetch('https://api.infojobs.net/api/5/application', {
     headers: {
-      'Content-type': 'application/json',
       Authorization: `${basicToken},${bearerToken}`
     }
   })
