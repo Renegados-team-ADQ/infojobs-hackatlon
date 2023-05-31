@@ -1,3 +1,4 @@
+'use client'
 import { getSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { getApplications } from '@/services/getApplications'
