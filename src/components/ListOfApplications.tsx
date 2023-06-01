@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { getApplications } from '@/services/getApplications'
 
 export default function ListOfApplications () {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useState<Array<{
     title: string
     code: string
@@ -19,6 +20,7 @@ export default function ListOfApplications () {
         const session = await getSession()
         if (session != null) {
           const data = await getApplications(session)
+          console.log('papa fetch fet')
           setData(data)
         }
       } catch (error) {
@@ -39,7 +41,7 @@ export default function ListOfApplications () {
         : (
           <div>
 
-            <p>{data[0].title}</p>
+            <p>se ha hecho el fetch</p>
 
           </div>
           )}
