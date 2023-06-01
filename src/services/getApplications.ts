@@ -41,7 +41,8 @@ export async function getApplications (session: Session) {
   const bearerToken = `Bearer ${session?.accessToken ?? ''}`
   const res = await fetch('https://api.infojobs.net/api/5/application', {
     headers: {
-      Authorization: `${basicToken},${bearerToken}`
+      Authorization: `${basicToken},${bearerToken}`,
+      key: 'Access-Control-Allow-Origin'
     }
   })
   const { item }: { item: APIResultApplications } = await res.json()
