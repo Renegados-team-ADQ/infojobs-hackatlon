@@ -39,10 +39,10 @@ export interface JobOffer {
 export async function getApplications (session: Session) {
   const basicToken = `Basic ${Buffer.from(`${process.env.INFOJOBS_ID ?? ''}:${process.env.INFOJOBS_SECRET ?? ''}`).toString('base64')}`
   const bearerToken = `Bearer ${session?.accessToken ?? ''}`
-  const res = await fetch('https://api.infojobs.net/api/5/application', {
+  const res = await fetch('https://cors-anywhere.herokuapp.com/https://api.infojobs.net/api/5/application', {
+    method: 'GET',
     headers: {
-      Authorization: `${basicToken},${bearerToken}`,
-      key: 'Access-Control-Allow-Origin'
+      Authorization: `${basicToken},${bearerToken}`
     }
   })
   const { item }: { item: APIResultApplications } = await res.json()
